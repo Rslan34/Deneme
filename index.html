@@ -1,0 +1,14 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set_style("whitegrid")
+#VERİ ENTEGRASYONU
+data=pd.read_csv("dosya konumu",sep=";", endcoding='unicode_escape') #sales#
+#VERİ ÖNİŞLEME
+#VERİ TEMİZLEME
+#ÇİFTE KAYITLARIN AYIKLANMASI
+yenidata=data.drop_dublicates(subset="ORDERNUMBER") #PRODUCTCODE# kolon adı
+data.sort_values("ORDERNUMBER",inplace=True)
+data=pd.read("C:\data\sales_dataBinning.csv", sep=";",endcoding='unicode_escape')
+data=data.groupby(["account number","name"])["ext price"].sum().reset_index()
+data["ext price"].plat(kind="hist")

@@ -2,6 +2,9 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 sns.set_style("whitegrid")
+from matplotlib import pyplot as plt
+from scipy.optimize import curve_fit
+from numpy import arange
 #VERİ ENTEGRASYONU
 data=pd.read_csv("dosya konumu",sep=";", endcoding='unicode_escape') #sales#
 #VERİ ÖNİŞLEME
@@ -12,3 +15,30 @@ data.sort_values("ORDERNUMBER",inplace=True)
 data=pd.read("C:\data\sales_dataBinning.csv", sep=";",endcoding='unicode_escape')
 data=data.groupby(["account number","name"])["ext price"].sum().reset_index()
 data["ext price"].plat(kind="hist")
+print(data["ext price"].describe())
+print(pd.qcut(data["ext price"],q=4))
+data["quantile_ex_1"]=pd.qcut(data["ext price"],q=4)
+labels=["Bronze","Silver","Gold","Platinum","Diamond"]
+data["quantile_ex_2"]=pd.qcut(data["ext price"],q=[0,.2,.4,.6,.8,1],labels=labels)
+data=pd.read_csv("moving_avarage.csv",sep",",endcoding"unicode_escape")
+rolling=data.rolling(window=9)
+rolling_mean=rolling["Births"].mean()
+data.plot()
+rolling_mean.plot(color="red")
+pyplot.show()
+
+
+def objective(x,a,b):
+    return a*x+b
+dataframe=pd.read_csv("C:\data\curveFitting.csv",sep=",",endcoding='unicode_escape')
+data=dataframe.values
+x,y=data[:4],data[:,-1]
+popt,_curve_fit(objective,x,y)
+a,b=popt
+print('y=%.5f*x+%.5f'%(a,b)
+plt.scatter(x,y)
+x_line=arange(min(x),max(x),1)
+y_line=objective(x_line,a,b)
+plt.plot(x_line,y_line,'--',color='red')
+plt.show()
+

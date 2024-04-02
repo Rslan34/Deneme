@@ -42,3 +42,29 @@ y_line=objective(x_line,a,b)
 plt.plot(x_line,y_line,'--',color='red')
 plt.show()
 
+#2. Hafta#
+#1#
+
+n=10
+gelir=np.array([4000,0,4500,3500,5000,4800,0,3800,3500,3750])
+cinsiyet=np.array([1,2,2,1,0,2,1,0,1,1])
+var_a=gelir.var(ddof=1)
+var_b=cinsiyet.var_a+var_b)/2)
+t=(gelir.mean()-cinsiyet.mean())/(s*np.sqrt(2/N))
+
+df=2*N-2
+p=1-stats.t.cdf(t,df=df)
+
+t2,p2=stats.ttest_ind(gelir,cinsiyet)
+
+print("t="+str(t2))
+print("p="+str(t2))
+
+#2#
+
+
+
+
+
+
+
